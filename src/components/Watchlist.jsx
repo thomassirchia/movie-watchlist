@@ -1,5 +1,14 @@
-// import Movie from "./Movie";
+import Movie from "./Movie";
 
-export default function Watchlist() {
-  return <h1>Watchlist</h1>;
+export default function Watchlist({ watchlist, toggleWatchlist }) {
+  const movieElements = watchlist.map((movie) => (
+    <Movie
+      key={movie}
+      movieId={movie}
+      watchlist={watchlist}
+      toggleWatchlist={toggleWatchlist}
+    />
+  ));
+
+  return <div className="container">{movieElements}</div>;
 }

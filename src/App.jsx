@@ -23,12 +23,24 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setSearchResults(data.Search.map((movie) => movie.imdbID));
+      })
+      .catch((err) => {
+        console.log(err);
+        setSearchResults([]);
       });
   }, [searchTerm]);
 
   function handleSearchSubmit(e) {
     e.preventDefault();
     setSearchTerm(searchInput);
+  }
+
+  function toggleWatchlist(id) {
+    if (watchlist.includes(id)) {
+      setWatchlist((watchlist) => watchlist.filter((item) => item !== id));
+    } else {
+      setWatchlist([...watchlist, id]);
+    }
   }
 
   return (
@@ -42,9 +54,24 @@ function App() {
         <Route
           exact
           path="/"
-          element={<SearchResults searchResults={searchResults} />}
+          element={
+            <SearchResults
+              searchResults={searchResults}
+              watchlist={watchlist}
+              toggleWatchlist={toggleWatchlist}
+            />
+          }
         ></Route>
-        <Route exact path="/watchlist" element={<Watchlist />}></Route>
+        <Route
+          exact
+          path="/watchlist"
+          element={
+            <Watchlist
+              watchlist={watchlist}
+              toggleWatchlist={toggleWatchlist}
+            />
+          }
+        ></Route>
       </Routes>
     </>
   );

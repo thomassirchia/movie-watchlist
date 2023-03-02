@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Movie.css";
 
-export default function Movie({ movieId }) {
+export default function Movie({ movieId, watchlist, toggleWatchlist }) {
   const [movieData, setMovieData] = useState({});
 
   useEffect(() => {
@@ -10,7 +10,8 @@ export default function Movie({ movieId }) {
       .then((data) => setMovieData(data));
   }, []);
 
-  console.log(movieData);
+  // console.log(movieData);
+  const inWatchlist = watchlist.includes(movieData.imdbID);
 
   return (
     <div className="movie-card">
@@ -34,9 +35,14 @@ export default function Movie({ movieId }) {
         <div className="movie-card-sub-header">
           <p className="runtime">{movieData.Runtime}</p>
           <p className="genres">{movieData.Genre}</p>
-          <button className="watchlist-btn">
-            <img src="/images/add-icon.png" />
-            Watchlist
+          <button
+            className="watchlist-btn"
+            onClick={() => toggleWatchlist(movieData.imdbID)}
+          >
+            <img
+              src={`/images/${inWatchlist ? "remove-icon" : "add-icon"}.png`}
+            />
+            {inWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
           </button>
         </div>
         <div className="plot">{movieData.plot}</div>

@@ -35,7 +35,16 @@ export default function Header({ handleSearchSubmit, setSearchInput }) {
   return (
     <header>
       <h1>MovieWatchlist</h1>
-      {headerLink}
+      <nav>
+        <Link to="/">
+          <h3 className={pathname === "/" ? "nav-selected" : ""}>Search</h3>
+        </Link>
+        <Link to="/watchlist">
+          <h3 className={pathname === "/watchlist" ? "nav-selected" : ""}>
+            My Watchlist
+          </h3>
+        </Link>
+      </nav>
       {pathname === "/" && searchBar}
     </header>
   );
