@@ -1,9 +1,7 @@
 import Movie from "./Movie";
 
 export default function SearchResults({ searchResults }) {
-  const resultElements = searchResults?.map((movie, index) => (
-    <Movie key={movie.title} title={movie.Title} />
-  ));
+  const movieElements = searchResults.map((movie) => <Movie movieId={movie} />);
 
-  return <div className="container">{resultElements}</div>;
+  return <div className="container">{movieElements}</div>;
 }

@@ -16,11 +16,9 @@ export default function Header({ handleSearchSubmit, setSearchInput }) {
       </Link>
     );
 
-  return (
-    <header>
-      <h1>MovieWatchlist</h1>
-      {headerLink}
-      <div className="search-bar">
+  const searchBar = (
+    <div className="search-bar">
+      <form>
         <input
           type="text"
           placeholder="Search for a movie"
@@ -30,7 +28,15 @@ export default function Header({ handleSearchSubmit, setSearchInput }) {
         <button id="search-btn" onClick={handleSearchSubmit}>
           Search
         </button>
-      </div>
+      </form>
+    </div>
+  );
+
+  return (
+    <header>
+      <h1>MovieWatchlist</h1>
+      {headerLink}
+      {pathname === "/" && searchBar}
     </header>
   );
 }

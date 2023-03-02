@@ -22,17 +22,14 @@ function App() {
     fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=83673317&s=${searchTerm}`)
       .then((res) => res.json())
       .then((data) => {
-        setSearchResults(data.Search);
-        console.log(data.Search);
+        setSearchResults(data.Search.map((movie) => movie.imdbID));
       });
   }, [searchTerm]);
 
-  function handleSearchSubmit() {
+  function handleSearchSubmit(e) {
+    e.preventDefault();
     setSearchTerm(searchInput);
-    // console.log("Hi");
   }
-
-  console.log(searchInput);
 
   return (
     <>

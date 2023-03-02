@@ -29,6 +29,10 @@
   font-size: 18px;
 }
 
+.movie-poster {
+  width: 100px;
+}
+
 .rating {
   display: flex;
   gap: 4px;
