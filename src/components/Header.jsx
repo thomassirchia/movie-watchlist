@@ -2,9 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 
 import "./Header.css";
 
-export default function Header() {
+export default function Header({ handleSearchSubmit, setSearchInput }) {
   const { pathname } = useLocation();
-  console.log(pathname);
 
   const headerLink =
     pathname === "/" ? (
@@ -22,8 +21,15 @@ export default function Header() {
       <h1>MovieWatchlist</h1>
       {headerLink}
       <div className="search-bar">
-        <input type="text" placeholder="Search for a movie" id="search-input" />
-        <button id="search-btn">Search</button>
+        <input
+          type="text"
+          placeholder="Search for a movie"
+          id="search-input"
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
+        <button id="search-btn" onClick={handleSearchSubmit}>
+          Search
+        </button>
       </div>
     </header>
   );

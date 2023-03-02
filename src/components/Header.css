@@ -1,6 +1,6 @@
 header {
   padding: 45px;
-  background: url("public/images/header.png");
+  background: url("/images/header.png");
   height: 208px;
   color: #fff;
   position: relative;

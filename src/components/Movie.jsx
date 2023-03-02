@@ -1,17 +1,17 @@
 import "./Movie.css";
 
-export default function Movie() {
+export default function Movie({ title }) {
   return (
     <div className="movie-card">
       <div className="movie-poster">
-        <img src="public/images/placeholder-poster.png" />
+        <img src="/images/placeholder-poster.png" />
       </div>
       <div className="movie-details">
         <div className="movie-card-header">
-          <h2>Blade Runner</h2>
+          <h2>{title}</h2>
           <div className="rating">
             <img
-              src="public/images/star-icon.png"
+              src="/images/star-icon.png"
               className="rating-icon"
               alt="gold star"
             />
@@ -22,7 +22,7 @@ export default function Movie() {
           <p className="runtime">117 min</p>
           <p className="genres">Action, Drama, Sci-fi</p>
           <button className="watchlist-btn">
-            <img src="public/images/add-icon.png" />
+            <img src="/images/add-icon.png" />
             Watchlist
           </button>
         </div>
