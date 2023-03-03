@@ -7,6 +7,7 @@ import Watchlist from "./components/Watchlist";
 import "./App.css";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -51,11 +52,15 @@ function App() {
     }
   }
 
-  console.log("has searched:", hasSearched);
+  function toggleDarkMode() {
+    setDarkMode(!darkMode);
+  }
 
   return (
-    <>
+    <div className="container">
       <Header
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
         handleSearchSubmit={handleSearchSubmit}
         setSearchInput={setSearchInput}
       />
@@ -66,6 +71,7 @@ function App() {
           path="/"
           element={
             <SearchResults
+              darkMode={darkMode}
               searchResults={searchResults}
               watchlist={watchlist}
               toggleWatchlist={toggleWatchlist}
@@ -79,13 +85,14 @@ function App() {
           path="/watchlist"
           element={
             <Watchlist
+              darkMode={darkMode}
               watchlist={watchlist}
               toggleWatchlist={toggleWatchlist}
             />
           }
         ></Route>
       </Routes>
-    </>
+    </div>
   );
 }
 

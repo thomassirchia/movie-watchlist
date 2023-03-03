@@ -1,33 +1,22 @@
 import Movie from "./Movie";
+import EmptyWatchlistPlaceholder from "./EmptyWatchlistPlaceholder";
+import styled from "styled-components";
 
-import "./Watchlist.css";
+const Container = styled.main`
+  background-color: ${(p) => (p.darkMode ? "#121212" : "#ffffff")};
+  flex: 1 1 auto;
+  padding: 0 44px 0 44px;
+`;
 
-function EmptyWatchlist() {
-  return (
-    <div className="empty-watchlist">
-      <h3 className="empty-watchlist-title">
-        Your watchlist is looking a little empty...
-      </h3>
-      <div className="add-movies">
-        <img
-          className="watchlist-add-icon"
-          src="/images/add-icon.png"
-          alt="Add icon"
-        />
-        <p className="empty-watchlist-text">Let’s add some movies!</p>
-      </div>
-    </div>
-  );
-}
-
-export default function Watchlist({ watchlist, toggleWatchlist }) {
+export default function Watchlist({ darkMode, watchlist, toggleWatchlist }) {
   const movieElements =
     watchlist.length === 0 ? (
-      <EmptyWatchlist />
+      <EmptyWatchlistPlaceholder darkMode={darkMode} />
     ) : (
       watchlist.map((movie) => (
         <Movie
           key={movie}
+          darkMode={darkMode}
           movieId={movie}
           watchlist={watchlist}
           toggleWatchlist={toggleWatchlist}
@@ -35,5 +24,5 @@ export default function Watchlist({ watchlist, toggleWatchlist }) {
       ))
     );
 
-  return <div className="container">{movieElements}</div>;
+  return <Container darkMode={darkMode}>{movieElements}</Container>;
 }

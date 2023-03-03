@@ -1,9 +1,11 @@
+import styled from "styled-components";
+
+const Img = styled.img`
+  display: block;
+  width: 150px;
+  margin: 30vh auto;
+`;
+
 export default function StartExploring() {
-  return (
-    <img
-      className="start-exploring"
-      src="/images/start-exploring.png"
-      alt="Start exploring"
-    />
-  );
+  return <Img src="/images/start-exploring.png" alt="Start exploring" />;
 }

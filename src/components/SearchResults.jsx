@@ -1,12 +1,18 @@
 import { useEffect } from "react";
+import styled from "styled-components";
 
 import Movie from "./Movie";
 import NoResults from "./NoResults";
 import StartExploring from "./StartExploring";
 
-import "./SearchResults.css";
+const Container = styled.main`
+  background-color: ${(p) => (p.darkMode ? "#121212" : "#ffffff")};
+  flex: 1 1 auto;
+  padding: 0 44px 0 44px;
+`;
 
 export default function SearchResults({
+  darkMode,
   searchResults,
   hasSearched,
   setHasSearched,
@@ -24,6 +30,7 @@ export default function SearchResults({
       searchResults.map((movie) => (
         <Movie
           key={movie}
+          darkMode={darkMode}
           movieId={movie}
           watchlist={watchlist}
           toggleWatchlist={toggleWatchlist}
@@ -32,8 +39,8 @@ export default function SearchResults({
     );
 
   return (
-    <div className="container">
+    <Container darkMode={darkMode}>
       {!hasSearched ? <StartExploring /> : movieElements}
-    </div>
+    </Container>
   );
 }
