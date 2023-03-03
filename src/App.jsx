@@ -10,6 +10,7 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
   const [watchlist, setWatchlist] = useState(
     JSON.parse(localStorage.getItem("watchlist")) || []
   );
@@ -19,19 +20,26 @@ function App() {
   }, [watchlist]);
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=83673317&s=${searchTerm}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setSearchResults(data.Search.map((movie) => movie.imdbID));
-      })
-      .catch((err) => {
-        console.log(err);
-        setSearchResults([]);
-      });
+    if (hasSearched) {
+      fetch(
+        `http://www.omdbapi.com/?i=tt3896198&apikey=83673317&s=${searchTerm}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setSearchResults(data.Search.map((movie) => movie.imdbID));
+          // setHasSearched(true);
+        })
+        .catch((err) => {
+          console.log(err);
+          setSearchResults([]);
+          // setHasSearched(true);
+        });
+    }
   }, [searchTerm]);
 
   function handleSearchSubmit(e) {
     e.preventDefault();
+    setHasSearched(true);
     setSearchTerm(searchInput);
   }
 
@@ -42,6 +50,8 @@ function App() {
       setWatchlist([...watchlist, id]);
     }
   }
+
+  console.log("has searched:", hasSearched);
 
   return (
     <>
@@ -59,6 +69,8 @@ function App() {
               searchResults={searchResults}
               watchlist={watchlist}
               toggleWatchlist={toggleWatchlist}
+              hasSearched={hasSearched}
+              setHasSearched={setHasSearched}
             />
           }
         ></Route>

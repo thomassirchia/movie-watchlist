@@ -1,32 +1,39 @@
+import { useEffect } from "react";
+
 import Movie from "./Movie";
+import NoResults from "./NoResults";
+import StartExploring from "./StartExploring";
+
 import "./SearchResults.css";
 
 export default function SearchResults({
   searchResults,
+  hasSearched,
+  setHasSearched,
   watchlist,
   toggleWatchlist,
 }) {
-  const noResults = <h2>No Results</h2>;
-
-  const startExploring = (
-    <img
-      className="start-exploring"
-      src="/images/start-exploring.png"
-      alt="Start exploring"
-    />
-  );
+  useEffect(() => {
+    setHasSearched(false);
+  }, []);
 
   const movieElements =
-    searchResults.length === 0
-      ? noResults
-      : searchResults.map((movie) => (
-          <Movie
-            key={movie}
-            movieId={movie}
-            watchlist={watchlist}
-            toggleWatchlist={toggleWatchlist}
-          />
-        ));
+    searchResults.length === 0 ? (
+      <NoResults />
+    ) : (
+      searchResults.map((movie) => (
+        <Movie
+          key={movie}
+          movieId={movie}
+          watchlist={watchlist}
+          toggleWatchlist={toggleWatchlist}
+        />
+      ))
+    );
 
-  return <div className="container">{movieElements}</div>;
+  return (
+    <div className="container">
+      {!hasSearched ? <StartExploring /> : movieElements}
+    </div>
+  );
 }

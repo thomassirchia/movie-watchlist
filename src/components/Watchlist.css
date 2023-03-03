@@ -1,0 +1,30 @@
+.empty-watchlist {
+  text-align: center;
+  margin: 30vh auto;
+}
+
+.add-movies {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.watchlist-add-icon {
+  width: 18px;
+}
+
+.empty-watchlist-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: #dfdddd;
+  margin: 0;
+}
+
+.empty-watchlist-text {
+  font-weight: 700;
+  font-size: 14px;
+  color: #363636;
+  margin: 0;
+}

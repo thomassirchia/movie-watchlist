@@ -8,11 +8,11 @@ export default function Header({ handleSearchSubmit, setSearchInput }) {
   const headerLink =
     pathname === "/" ? (
       <Link to="/watchlist">
-        <h3>My Watchlist</h3>
+        <h3>My watchlist</h3>
       </Link>
     ) : (
       <Link to="/">
-        <h3>Search</h3>
+        <h3>Search for movies</h3>
       </Link>
     );
 
@@ -34,17 +34,8 @@ export default function Header({ handleSearchSubmit, setSearchInput }) {
 
   return (
     <header>
-      <h1>MovieWatchlist</h1>
-      <nav>
-        <Link to="/">
-          <h3 className={pathname === "/" ? "nav-selected" : ""}>Search</h3>
-        </Link>
-        <Link to="/watchlist">
-          <h3 className={pathname === "/watchlist" ? "nav-selected" : ""}>
-            My Watchlist
-          </h3>
-        </Link>
-      </nav>
+      <h1>{pathname === "/" ? "Find your film" : "My Watchlist"}</h1>
+      {headerLink}
       {pathname === "/" && searchBar}
     </header>
   );
