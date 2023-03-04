@@ -6,14 +6,10 @@ import SearchBar from "./SearchBar";
 
 const StyledHeader = styled.header`
   position: relative;
-  padding: 45px;
   background: url("/images/header.png");
   height: 208px;
   color: #fff;
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
 `;
 
 const H1 = styled.h1`
@@ -29,6 +25,19 @@ const H3 = styled.h3`
   font-weight: 700;
   font-size: 14px;
   line-height: 20px;
+`;
+
+const Container = styled.div`
+  padding: 45px;
+  max-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0 auto;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const DarkModeToggleWrapper = styled.div`
@@ -65,20 +74,22 @@ export default function Header({
 
   return (
     <StyledHeader>
-      <DarkModeToggleWrapper>
-        <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      </DarkModeToggleWrapper>
-      <H1>{pathname === "/" ? "Find your film" : "My Watchlist"}</H1>
-      {headerLink}
-      {pathname === "/" && (
-        <SearchBarWrapper>
-          <SearchBar
-            darkMode={darkMode}
-            setSearchInput={setSearchInput}
-            handleSearchSubmit={handleSearchSubmit}
-          />
-        </SearchBarWrapper>
-      )}
+      <Container>
+        <DarkModeToggleWrapper>
+          <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        </DarkModeToggleWrapper>
+        <H1>{pathname === "/" ? "Find your film" : "My Watchlist"}</H1>
+        {headerLink}
+        {pathname === "/" && (
+          <SearchBarWrapper>
+            <SearchBar
+              darkMode={darkMode}
+              setSearchInput={setSearchInput}
+              handleSearchSubmit={handleSearchSubmit}
+            />
+          </SearchBarWrapper>
+        )}
+      </Container>
     </StyledHeader>
   );
 }

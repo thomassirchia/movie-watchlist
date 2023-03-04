@@ -2,10 +2,14 @@ import Movie from "./Movie";
 import EmptyWatchlistPlaceholder from "./EmptyWatchlistPlaceholder";
 import styled from "styled-components";
 
-const Container = styled.main`
-  background-color: ${(p) => (p.darkMode ? "#121212" : "#ffffff")};
+const Container = styled.div`
   flex: 1 1 auto;
-  padding: 0 44px 0 44px;
+  padding: 45px;
+  max-width: 700px;
+
+  @media (max-width: 600px) {
+    padding: 0 20px;
+  }
 `;
 
 export default function Watchlist({ darkMode, watchlist, toggleWatchlist }) {

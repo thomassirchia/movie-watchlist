@@ -14,3 +14,12 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+/* 
+.container.dark {
+  background-color: "#121212" : "#ffffff"
+}
+
+.wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+} */

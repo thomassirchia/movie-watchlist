@@ -5,10 +5,14 @@ import Movie from "./Movie";
 import NoResults from "./NoResults";
 import StartExploring from "./StartExploring";
 
-const Container = styled.main`
-  background-color: ${(p) => (p.darkMode ? "#121212" : "#ffffff")};
+const Container = styled.div`
   flex: 1 1 auto;
-  padding: 0 44px 0 44px;
+  padding: 45px;
+  max-width: 700px;
+
+  @media (max-width: 600px) {
+    padding: 0 20px;
+  }
 `;
 
 export default function SearchResults({

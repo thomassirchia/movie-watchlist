@@ -98,7 +98,6 @@ export default function Movie({
     ? `/images/${inWatchlist ? "remove-icon-dark" : "add-icon-dark"}.png`
     : `/images/${inWatchlist ? "remove-icon" : "add-icon"}.png`;
 
-  console.log(movieData);
   return (
     <Card darkMode={darkMode}>
       <Poster

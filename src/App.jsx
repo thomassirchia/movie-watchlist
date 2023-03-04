@@ -1,20 +1,46 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import styled from "styled-components";
+
 import Header from "./components/Header";
 import SearchResults from "./components/SearchResults";
 import Watchlist from "./components/Watchlist";
 
 import "./App.css";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: ${(p) => (p.darkMode ? "#121212" : "#ffffff")};
+`;
+
+const Main = styled.main`
+  margin: 0 auto;
+  flex: 1 1 auto;
+`;
+
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const storedValue = JSON.parse(localStorage.getItem("darkMode"));
+    if (storedValue !== null) {
+      return storedValue;
+    } else {
+      return [];
+    }
+  });
+
   const [watchlist, setWatchlist] = useState(
     JSON.parse(localStorage.getItem("watchlist")) || []
   );
+
+  useEffect(() => {
+    window.localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
 
   useEffect(() => {
     window.localStorage.setItem("watchlist", JSON.stringify(watchlist));
@@ -28,12 +54,10 @@ function App() {
         .then((res) => res.json())
         .then((data) => {
           setSearchResults(data.Search.map((movie) => movie.imdbID));
-          // setHasSearched(true);
         })
         .catch((err) => {
           console.log(err);
           setSearchResults([]);
-          // setHasSearched(true);
         });
     }
   }, [searchTerm]);
@@ -57,42 +81,43 @@ function App() {
   }
 
   return (
-    <div className="container">
+    <Container darkMode={darkMode}>
       <Header
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
         handleSearchSubmit={handleSearchSubmit}
         setSearchInput={setSearchInput}
       />
-
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <SearchResults
-              darkMode={darkMode}
-              searchResults={searchResults}
-              watchlist={watchlist}
-              toggleWatchlist={toggleWatchlist}
-              hasSearched={hasSearched}
-              setHasSearched={setHasSearched}
-            />
-          }
-        ></Route>
-        <Route
-          exact
-          path="/watchlist"
-          element={
-            <Watchlist
-              darkMode={darkMode}
-              watchlist={watchlist}
-              toggleWatchlist={toggleWatchlist}
-            />
-          }
-        ></Route>
-      </Routes>
-    </div>
+      <Main>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <SearchResults
+                darkMode={darkMode}
+                searchResults={searchResults}
+                watchlist={watchlist}
+                toggleWatchlist={toggleWatchlist}
+                hasSearched={hasSearched}
+                setHasSearched={setHasSearched}
+              />
+            }
+          ></Route>
+          <Route
+            exact
+            path="/watchlist"
+            element={
+              <Watchlist
+                darkMode={darkMode}
+                watchlist={watchlist}
+                toggleWatchlist={toggleWatchlist}
+              />
+            }
+          ></Route>
+        </Routes>
+      </Main>
+    </Container>
   );
 }
 
