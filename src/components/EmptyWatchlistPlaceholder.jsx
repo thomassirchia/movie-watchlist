@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  align-self: center;
   text-align: center;
-  margin: 30vh auto;
 
   h3 {
     font-weight: 700;

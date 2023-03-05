@@ -16,6 +16,7 @@ const Container = styled.div`
 `;
 
 const Main = styled.main`
+  display: flex;
   margin: 0 auto;
   flex: 1 1 auto;
 `;

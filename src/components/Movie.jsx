@@ -13,6 +13,10 @@ const Card = styled.div`
   p {
     margin: 0;
   }
+
+  @media (max-width: 600px) {
+    margin: 0;
+  }
 `;
 
 const CardHeader = styled.div`
@@ -29,16 +33,26 @@ const CardHeader = styled.div`
     font-size: 18px;
     line-height: 20px;
   }
+
+  @media (max-width: 600px) {
+    margin-bottom: 0;
+  }
 `;
 
 const CardSubheader = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 
   p {
     font-size: 12px;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 `;
 
@@ -76,6 +90,10 @@ const WatchlistButton = styled.button`
   img {
     height: 16px;
     width: 16px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0;
   }
 `;
 

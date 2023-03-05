@@ -13,20 +13,25 @@ const Container = styled.div`
 `;
 
 export default function Watchlist({ darkMode, watchlist, toggleWatchlist }) {
-  const movieElements =
-    watchlist.length === 0 ? (
-      <EmptyWatchlistPlaceholder darkMode={darkMode} />
-    ) : (
-      watchlist.map((movie) => (
-        <Movie
-          key={movie}
-          darkMode={darkMode}
-          movieId={movie}
-          watchlist={watchlist}
-          toggleWatchlist={toggleWatchlist}
-        />
-      ))
-    );
+  const watchlistEmpty = watchlist.length === 0;
 
-  return <Container darkMode={darkMode}>{movieElements}</Container>;
+  const movieElements = watchlistEmpty ? (
+    <EmptyWatchlistPlaceholder darkMode={darkMode} />
+  ) : (
+    watchlist.map((movie) => (
+      <Movie
+        key={movie}
+        darkMode={darkMode}
+        movieId={movie}
+        watchlist={watchlist}
+        toggleWatchlist={toggleWatchlist}
+      />
+    ))
+  );
+
+  return watchlistEmpty ? (
+    <EmptyWatchlistPlaceholder darkMode={darkMode} />
+  ) : (
+    <Container darkMode={darkMode}>{movieElements}</Container>
+  );
 }

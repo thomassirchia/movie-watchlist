@@ -7,7 +7,6 @@ import SearchBar from "./SearchBar";
 const StyledHeader = styled.header`
   position: relative;
   background: url("/images/header.png");
-  height: 208px;
   color: #fff;
   position: relative;
 `;
@@ -20,11 +19,13 @@ const H1 = styled.h1`
 `;
 
 const H3 = styled.h3`
-  text-decoration: none;
   color: #fff;
   font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 16px;
+
+  &:hover {
+    color: #d7a132;
+  }
 `;
 
 const Container = styled.div`
@@ -35,8 +36,20 @@ const Container = styled.div`
   align-items: baseline;
   margin: 0 auto;
 
+  a {
+    text-decoration: none;
+    color: #ffbd38;
+    font-weight: 700;
+    font-size: 16px;
+
+    &:hover {
+      color: #ffac05;
+    }
+  }
+
   @media (max-width: 600px) {
     flex-direction: column;
+    padding: 20px 20px 40px 20px;
   }
 `;
 
@@ -51,6 +64,11 @@ const SearchBarWrapper = styled.div`
   bottom: -17px;
   left: 0;
   right: 0;
+
+  @media (max-width: 600px) {
+    padding: 20px;
+    bottom: -40px;
+  }
 `;
 
 export default function Header({
@@ -63,13 +81,9 @@ export default function Header({
 
   const headerLink =
     pathname === "/" ? (
-      <Link to="/watchlist">
-        <H3>My watchlist</H3>
-      </Link>
+      <Link to="/watchlist">My watchlist</Link>
     ) : (
-      <Link to="/">
-        <H3>Search for movies</H3>
-      </Link>
+      <Link to="/">Search for movies</Link>
     );
 
   return (

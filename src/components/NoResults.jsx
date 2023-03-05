@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 const H3 = styled.h3`
+  align-self: center;
   font-weight: 700;
   font-size: 18px;
   line-height: 20px;
   text-align: center;
   color: #dfdddd;
-  margin: 30vh auto;
 `;
 
 export default function NoResults() {

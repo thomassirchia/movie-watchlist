@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const Img = styled.img`
+  align-self: center;
   display: block;
   width: 150px;
-  margin: 30vh auto;
 `;
 
 export default function StartExploring() {
