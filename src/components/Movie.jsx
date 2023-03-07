@@ -106,9 +106,30 @@ export default function Movie({
   const [movieData, setMovieData] = useState({});
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?i=${movieId}&apikey=83673317`)
-      .then((res) => res.json())
-      .then((data) => setMovieData(data));
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    fetch(`http://www.omdbapi.com/?i=${movieId}&apikey=83673317`, {
+      signal: signal,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("Could not fetch the data for that resource");
+        }
+        return res.json();
+      })
+      .then((data) => setMovieData(data))
+      .catch((err) => {
+        if (err.name === "AbortError") {
+          console.log("fetch aborted");
+        } else {
+          console.log(err.message);
+        }
+      });
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   const inWatchlist = watchlist.includes(movieData.imdbID);

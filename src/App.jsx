@@ -48,19 +48,36 @@ function App() {
   }, [watchlist]);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     if (hasSearched) {
       fetch(
-        `http://www.omdbapi.com/?i=tt3896198&apikey=83673317&s=${searchTerm}`
+        `http://www.omdbapi.com/?i=tt3896198&apikey=83673317&s=${searchTerm}`,
+        { signal: signal }
       )
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("Could not fetch the data for that resource");
+          }
+          return res.json();
+        })
         .then((data) => {
           setSearchResults(data.Search.map((movie) => movie.imdbID));
         })
         .catch((err) => {
-          console.log(err);
+          if (err.name === "AbortError") {
+            console.log("fetch aborted");
+          } else {
+            console.log(err);
+          }
           setSearchResults([]);
         });
     }
+
+    return () => {
+      controller.abort();
+    };
   }, [searchTerm]);
 
   function handleSearchSubmit(e) {
