@@ -53,7 +53,7 @@ function App() {
 
     if (hasSearched) {
       fetch(
-        `http://www.omdbapi.com/?i=tt3896198&apikey=83673317&s=${searchTerm}`,
+        `https://www.omdbapi.com/?i=tt3896198&apikey=83673317&s=${searchTerm}`,
         { signal: signal }
       )
         .then((res) => {
