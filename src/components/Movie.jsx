@@ -109,7 +109,7 @@ export default function Movie({
     const controller = new AbortController();
     const signal = controller.signal;
 
-    fetch(`http://www.omdbapi.com/?i=${movieId}&apikey=83673317`, {
+    fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=83673317`, {
       signal: signal,
     })
       .then((res) => {
