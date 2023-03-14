@@ -6,7 +6,7 @@ const Card = styled.div`
   gap: 21px;
   align-items: center;
   margin: 22px 0 22px 0;
-  padding: 21px 0 21px 0;
+  padding: 21px 0 42px 0;
   border-bottom: 1.5px solid ${(p) => (p.darkMode ? "#2C2C2C" : "#e5e7eb")};
   color: ${(p) => (p.darkMode ? "#FFFFFF" : "#111827")};
 
